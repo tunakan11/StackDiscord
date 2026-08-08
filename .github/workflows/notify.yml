@@ -1,0 +1,12 @@
+name: Notify Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "helo from GitHub Actions"

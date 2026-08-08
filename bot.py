@@ -249,7 +249,7 @@ async def check_reminders():
             footer="完了したら /task done を実行してください",
         )
 
-        if channel:
+        if isinstance(channel, (discord.TextChannel, discord.Thread)):
             await channel.send(content=f"<@{uid}>", embed=embed)
         else:
             try:
@@ -264,7 +264,8 @@ async def check_reminders():
 
 @bot.event
 async def on_ready():
-    print(f"ログイン成功: {bot.user.name}")
+    if bot.user:
+        print(f"ログイン成功: {bot.user.name}")
 
     try:
         synced = await bot.tree.sync()
@@ -272,8 +273,8 @@ async def on_ready():
     except Exception as e:
         print(f"同期失敗: {e}")
 
-    if not check_reminders.is_running():
-        check_reminders.start()
+    if not check_reminders.is_running(): # type: ignore[attr-defined]
+        check_reminders.start() # type: ignore[attr-defined]
 
 
 # ============================================================
