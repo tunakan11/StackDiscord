@@ -9,4 +9,5 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello from GitHub Actions"
+      - run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"content": "テストメッセージ"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
