@@ -10,4 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"content": "${{ github.actor}}さんが ${{ github.ref_name }} ブランチにpushしました。message: ${{github.event.head_commit.message }}"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST -H "Content-Type: application/json" \
+            -d "$(jq -n --arg actor "${{ github.actor }}" \
+                        --arg branch "${{ github.ref_name }}" \
+                        --arg msg "${{ github.event.head_commit.message }}" \
+                        '{content: "\($actor)さんが \($branch) ブランチにpushしました。message: \($msg)"}')" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
