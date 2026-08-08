@@ -9,4 +9,4 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "helo from GitHub Actions"
+      - run: echo "hello from GitHub Actions"
