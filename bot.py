@@ -5,6 +5,7 @@ from discord import app_commands
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 import os
+from embeds import build_embed, STATUS_COLOR
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
